@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media screen and (max-width: 3000px) and (min-width: 1250px) {
+    
+}
+
+@media screen and (max-width: 1250) and (min-width: 1000) {
+
+}
+
+@media screen and (max-width: 1000) and (min-width: 760) {
+
+}
+
+@media screen and (max-width: 760) and (min-width: 0) {
+
+}
