@@ -17,6 +17,11 @@ export const itemsFilter = (query) => {
         filter.is_viewing = true;
     }
 
+    // 멤버쉽 작품만 시청 여부 필터 추가
+    if (query.svod === "true") {
+        filter.is_svod = true;
+    }
+
     // 장르 필터 추가
     if (query.genres) {
         const genresArray = query.genres.split(',');
