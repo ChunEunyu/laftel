@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-type logoProps = {
+type LogoProps = {
     color: string;
     width: number;
     height: number;
 }
 
-export function Logo({ color = "white", width = 72, height = 24 }: logoProps) {
+export function Logo({ color = "white", width = 72, height = 24 }: LogoProps) {
     return(
         <Link to='/'>
             <svg
