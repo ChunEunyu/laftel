@@ -36,7 +36,7 @@ const dark = "#191B2A"
 const white = "#fff"
 
 const menuStyle = {
-  base: 'hover:text-[#D1D1D1] white text-medium no-underline text-[16px] font-extrabold text-opacity-90 tracking-tighter', 
+  base: 'hover:text-border-2 hover:text-opacity-90  text-white text-medium no-underline text-[16px] font-extrabold text-opacity-90 tracking-tighter', 
   scrolled: 'hover:text-[#816bff] purple-gray text-medium no-underline text-[16px] font-extrabold text-opacity-90 tracking-tighter ',
 }; 
 
@@ -46,6 +46,6 @@ const listStyle = {
 };
 
 const navStyle = {
-  base: 'flex gap-8 hover:text-gray-500',
-  scrolled: 'flex gap-8'
+  base: 'flex gap-8 hover:text-gray-500 max-lg:hidden',
+  scrolled: 'max-lg:hidden flex gap-8'
 };
