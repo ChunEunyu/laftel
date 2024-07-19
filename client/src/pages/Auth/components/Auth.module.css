@@ -1,0 +1,44 @@
+.container {
+    background-color: #000000;
+}
+
+.bg0 {
+    background-image: url('@/assets/auth/BG_0.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.bg1 {
+    
+    background-image: url('@/assets/auth/BG_1.png');
+    
+}
+
+.bg2 {
+    background-image: url('@/assets/auth/BG_2.png');
+    background-position: top 50%;
+}
+
+.bg3 {
+    background-image: url('@/assets/auth/BG_3.png');
+    background-position: top 50%;
+    
+}
+
+.bg4 {
+    background-image: url('@/assets/auth/BG_4.png');
+    background-position: top 100;
+    
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 100%;
+    }
+    50% {
+        background-position: 100% 200%;
+    }
+    100% {
+        background-position: 200% 0%;
+    }
+};
