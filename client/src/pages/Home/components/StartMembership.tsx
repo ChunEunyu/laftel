@@ -1,5 +1,5 @@
 import React from 'react';
-import StartMembershipLogo from '@/assets/StartMembershipLogo';
+import StartMembershipLogo from '@/assets/Logo/StartMembershipLogo';
 import { Link } from 'react-router-dom';
 
 const StartMembership = () => {
