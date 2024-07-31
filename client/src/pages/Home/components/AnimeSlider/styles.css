@@ -1,0 +1,8 @@
+.swiper-button-prev {
+    display: none !important; /* 버튼 숨기기 */
+}
+
+.swiper-button-next {
+    color: white !important;
+}
+
