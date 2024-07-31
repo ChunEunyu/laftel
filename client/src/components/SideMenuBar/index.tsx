@@ -8,8 +8,8 @@ import {
 } from "@/features/nav/clickSlice";
 import { useAppDispatch } from "@/app/hooks";
 
-import { Character } from '@/assets/Character';
-import { Logo } from '@/assets/Logo';
+import { Character } from '@/assets/Logo/Character';
+import { Logo } from '@/assets/Logo/Logo';
 
 import { FaRegCheckSquare } from 'react-icons/fa';
 import { IoMdCard } from 'react-icons/io';
@@ -32,9 +32,9 @@ export default function SideMenuBar() {
   }, [isMobile]);
 
   return (
-    <div className='fixed top-0 right-0 pt-3 w-[19rem] h-screen flex flex-col bg-white'>
-      <div onClick={handleClickHamburger} className='flex justify-end mb-2 pl-4 pr-2'>
-        <IoCloseOutline className='w-9 h-9 text-[#121212]' />
+    <div className='fixed top-0 right-0 pt-3 w-[19rem] h-screen flex flex-col bg-white z-30'>
+      <div className='flex justify-end mb-2 pl-4 pr-2'>
+        <IoCloseOutline onClick={handleClickHamburger} className='w-9 h-9 text-[#121212]' />
       </div>
       <div className='flex flex-row pl-4 pr-2 gap-4'>
         <div>
@@ -42,11 +42,12 @@ export default function SideMenuBar() {
           <p className='mt-2 text-sm'>라프텔에 오신 것을 <br /> 환영합니다! </p>
         </div>
         <div className='pl-2'><Character width={110} height={100} /></div>
-        
       </div>
-      <button className='bg-purple ml-2 mr-2 pt-3 pb-3 mb-4 text-white text-bold rounded-md'>
-        로그인 가입
-      </button>
+      <Link to='/auth' className='bg-purple ml-2 mr-2 pt-3 pb-3 mb-4 text-white text-bold rounded-md'>
+        <button className='pl-24'>
+          로그인 가입
+        </button>
+      </Link>
       <div className='h-2 bg-border-1 w-inherit' />
       <Link to="/finder" className='flex ml-3 mt-4 mb-4 hover:text-purple' >
         <FaRegCheckSquare className='mt-[0.1rem] mr-2' />

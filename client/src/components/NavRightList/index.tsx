@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearch } from "react-icons/bi";
-import { Logo } from "@/assets/Logo";
+import { Logo } from "@/assets/Logo/Logo";
 
 import SideMenuBar from "../SideMenuBar";
 import SearchBar from "../SearchBar"
@@ -42,7 +42,7 @@ export default function NavRightList({ isScroll }: { isScroll: boolean } ) {
         <div className="flex flex-row">
           { clickSearch ? <SearchBar /> : <BiSearch onClick={handleClickSearch} className={combinedSearch} /> }
         </div>
-        <Link to="/auth/login" className={combinedToAuth}>
+        <Link to="/auth" className={combinedToAuth}>
           로그인/가입
         </Link>
         <div>
@@ -52,7 +52,14 @@ export default function NavRightList({ isScroll }: { isScroll: boolean } ) {
       <div className={combinedLogo}>
         <Logo color="black" width={80} height={25} />
       </div>
-      { clickHamburger && ( <SideMenuBar /> )}
+      { clickHamburger && ( 
+        <div 
+          onClick={handleClickHamburger}
+          className='fixed top-0 left-0 w-full h-full bg-background-dim-1 z-20'
+        >
+          <SideMenuBar /> 
+        </div>
+      )}
     </>
   );
 }

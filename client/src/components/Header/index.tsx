@@ -12,7 +12,7 @@ const Header = () => {
 
   const isHome = location.pathname === '/';
   
-  if (location.pathname.includes('auth')) {
+  if (location.pathname.includes('auth') || location.pathname.includes('profile')) {
     return null; 
   }
   

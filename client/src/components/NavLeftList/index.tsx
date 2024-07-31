@@ -1,4 +1,4 @@
-import { Logo } from "@/assets/Logo";
+import { Logo } from "@/assets/Logo/Logo";
 import { Link } from "react-router-dom";
 
 type categoryType = {
