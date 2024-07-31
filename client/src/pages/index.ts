@@ -9,13 +9,13 @@ import ThemeDetail from "./ThemeDetail";
 import ThemesAll from "./ThemesAll";
 import Landing from "./Membership/component/Landing";
 import Subscribed from "./Membership/component/Subscribed";
-import AuthEmail from "./Auth/components/AuthEmail";
 import AuthMain from "./Auth/components/AuthMain";
 import Search from "./Search";
+import Register from "./Auth/components/RegisterForm";
+import Login from "./Auth/components/LoginForm";
 
 export {
     Auth,
-    AuthEmail,
     AuthMain,
     Daily,
     Finder,
@@ -26,6 +26,8 @@ export {
     Themes,
     ThemeDetail,
     ThemesAll,
+    Register,
     Landing,
+    Login,
     Subscribed
 };
