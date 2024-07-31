@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -6,17 +5,13 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { GrNext } from "react-icons/gr";
 import { Carousel } from '@/types/carousels';
-import AnimeModal from '@/pages/AnimeModal';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useAppDispatch } from '@/app/hooks';
 import { toggle, animeId } from '@/features/modal/animeModalSlice';
-import { selectToggle } from '@/features/modal/animeModalSlice';
 
 const MainCarousels = ({ data }: { data?: Carousel[] }) => {
-  const isOpen = useAppSelector(selectToggle);
   const dispatch = useAppDispatch();
 
   return (
-    <>
     <Swiper
       spaceBetween={30}
       centeredSlides={true}
@@ -62,8 +57,6 @@ const MainCarousels = ({ data }: { data?: Carousel[] }) => {
             </SwiperSlide>
           )})}
     </Swiper>
-    { isOpen && <AnimeModal />}
-    </>
   );
 }
 
