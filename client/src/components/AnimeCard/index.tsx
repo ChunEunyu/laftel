@@ -1,45 +1,38 @@
-import React from "react";
-import Box from '@mui/material/Box';
-import CardMedia from "@mui/material/CardMedia";
-import Typography from '@mui/material/Typography';
+import { Daily } from "@/types/daily";
+import { RankingItem } from "@/types/ranking";
+import { Item } from "@/types/item";
+import { useAppDispatch } from '@/app/hooks';
+import { toggle, animeId } from '@/features/modal/animeModalSlice';
 
-interface Image {
-  option_name: string;
-  img_url: string;
-  crop_ratio: string;
-}
+type Props =  Daily | RankingItem | Item;
 
-interface Props {
-  id: number;
-  name: string;
-  img: string;
-  cropped_img: string;
-  is_adult: boolean;
-  images: Image[];
-  genres: string[];
-  highlight_video: string | null;
-  is_laftel_only: boolean;
-  is_laftel_original: boolean;
-  is_uncensored: boolean;
-  is_dubbed: boolean;
-  is_avod: boolean;
-  avod_status: string;
-  is_viewing: boolean;
-  content_rating: string;
-}
+const AnimeCard = ({ data }: { data: Props }) => {
+  const { id, name, img } = data;
 
-const AnimeCard = ({...props}: Props) => {
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => {
+    dispatch(toggle());
+    dispatch(animeId(id));
+  }
+  
   return (
-    <Box className="lg:h-48 md:h-40 sm:h-36 xs:h-32 max-sm:h-24">
-        <CardMedia 
-            className="object-cover rounded-sm w-full h-4/5"
-            component="img" 
-            image={props.img}
+    <div
+      onClick={handleClick} 
+      className="grow-0 shrink-0 mx-auto 2xl:h-56 xl:h-52 lg:h-48 md:h-40 sm:h-36 max-sm:h-32"
+    >
+        <img 
+            className="object-cover rounded-md w-full h-4/5"
+            src={img}
+            alt=""
         />
-        <p className="overflow-hidden overflow-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical'}}>
-          {props.name}
+        <p 
+          className="text-smoked-black overflow-hidden overflow-ellipsis whitespace-normal xl:text-[1.03rem] lg:text-[0.9rem] md:text-[0.85rem] sm:text-[0.8rem] max-sm:text-[0.75rem]" 
+          style={{ display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical'}}
+        >
+          {name}
         </p>
-    </Box>
+    </div>
   );
 }
 
