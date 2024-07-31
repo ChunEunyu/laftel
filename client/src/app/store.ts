@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import clickReducer from '@/features/nav/clickSlice';
-import isMobileReducer from '@/features/hooks/isMobileSlice';
+import clickedTagsReducer from '@/features/finder/clickedTagsSlice';
+import animeModalReducer from '@/features/modal/animeModalSlice';
 
 export const store = configureStore({
     reducer: {
         click: clickReducer,
-        isMobile: isMobileReducer,
+        clickedTags: clickedTagsReducer,
+        animeModal: animeModalReducer, 
     }
 });
 
