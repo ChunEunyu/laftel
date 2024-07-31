@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "@/app/store";
 
 export interface ClickState {
     clickSearch: boolean;
@@ -36,7 +37,7 @@ export const {
     setClickHamburger,
 } = clickSlice.actions;
 
-export const selectClickSearch = (state: { click: ClickState }) => state.click.clickSearch;
-export const selectClickHamburger = (state: { click: ClickState }) => state.click.clickHamburger;
+export const selectClickSearch = (state: RootState) => state.click.clickSearch;
+export const selectClickHamburger = (state: RootState) => state.click.clickHamburger;
 
 export default clickSlice.reducer;
