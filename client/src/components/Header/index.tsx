@@ -6,13 +6,16 @@ import NavRightList from "../NavRightList";
 import { useScroll } from "../../hooks/useScroll";
 import { useLocation } from "react-router-dom";
 
+const noneHeaderRoutes = ['auth', 'profile'];
+const isHome = location.pathname === '/';
+
 const Header = () => {
   const location = useLocation();
   const isScroll = useScroll();
 
-  const isHome = location.pathname === '/';
-  
-  if (location.pathname.includes('auth') || location.pathname.includes('profile')) {
+  const isNoneHeaderRoute = noneHeaderRoutes.some(route => location.pathname.startsWith('/'+route))
+
+  if (isNoneHeaderRoute) {
     return null; 
   }
   
