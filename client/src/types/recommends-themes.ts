@@ -4,7 +4,7 @@ interface Image {
     crop_ratio: string;
 }
   
-interface Anime {
+export interface Anime {
     id: number;
     name: string;
     images: Image[];
@@ -29,7 +29,7 @@ interface Anime {
     is_viewing: boolean;
 }
 
-type ThemeItem = {
+export type ThemeItem = {
     id: number;
     ment: string;
     item: Anime;
