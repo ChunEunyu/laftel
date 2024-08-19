@@ -1,14 +1,13 @@
 export interface DiscoverInfo {
-  _id: {
-    $oid: string;
-  };
-  brands: string[];
+  _id: string;
+  viewable: string[];
   genres: string[];
   tags: string[];
   years: {
     animation: string[];
   };
-  productions: string[];
+  ending: string[];
   medium: string[];
+  brands: string[];
 }
 
