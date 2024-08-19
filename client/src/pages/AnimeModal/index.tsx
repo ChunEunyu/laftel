@@ -1,6 +1,7 @@
-import React, { ReactNode, useState } from 'react';
-import { useAppDispatch, useAppSelector  } from '@/app/hooks';
-import { toggle } from '@/features/modal/animeModalSlice';
+import React, { ReactNode, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { selectToggle, toggle } from '@/features/modal/animeModalSlice';
 import { selectId } from '@/features/modal/animeModalSlice';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
@@ -15,13 +16,14 @@ import { MdOutlineExpandMore } from "react-icons/md";
 import { MdOutlineExpandLess } from "react-icons/md";
 
 export default function AnimeModal() {
+  const navigate = useNavigate();
   const isMobile = useScreenWidth();
-  
   const id: number = useAppSelector(selectId);
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
     dispatch(toggle());
+    navigate(-1);
   };
 
   const { data: detailed }: UseQueryResult<Item> = useQuery({
@@ -61,7 +63,8 @@ const Content = ({ data }: { data?: Item }) => {
     setExpandedContent(!expandedContent);
   }
 
-  const img = data?.images[0]?.img_url;
+  const bgImg = data?.images[1]? data.images[1].img_url : data?.images[0].img_url;
+  const posterImg = data?.images[0].img_url;
   const genresS = data?.genres?.length ? 
                 (data.genres.length > 1 ? data.genres.join('·') : data.genres.join()) 
                 : '';
@@ -88,11 +91,11 @@ const Content = ({ data }: { data?: Item }) => {
                 rgba(25, 27, 42, 0.25) 75%,
                 rgba(25, 27, 42, 1) 100%
               ),
-              url(${img})`,
+              url(${bgImg})`,
               backgroundSize: 'cover',
               backgroundPosition: 'right center', // 추가하여 배경 이미지의 위치 조정
             }}
-            className='absolute top-0 right-0 bottom-0 left-auto w-[48.75rem] max-w-full h-auto aspect-[780/440] object-cover opacity-50'
+            className='absolute top-0 right-0 bottom-0 bg-no-repeat left-auto w-[48.75rem] max-w-full h-[28rem] object-cover opacity-50'
           />
           <div className='relative top-0 right-1 flex justify-end pt-6 pr-5 gap-2'>
             <BackgroundCircle>
@@ -110,7 +113,7 @@ const Content = ({ data }: { data?: Item }) => {
                 <div className='absolute top-[7.5rem] right-[3.5rem]'>
                   <img 
                     className='relative object-cover border-none h-[16.6875rem] w-[12.5rem] rounded-[0.37625rem]' 
-                    src={img} 
+                    src={posterImg} 
                     alt='' 
                   />
                   {data?.production? (
@@ -132,7 +135,7 @@ const Content = ({ data }: { data?: Item }) => {
               <div className='top-0 w-[3.6rem] flex flex-row gap-1 bg-white bg-opacity-15 px-2 py-[0.4rem] rounded-md'>
                 <FaStar className='w-[0.7rem] h-[0.7rem] mt-[5px]' />
                 <p className='text-[0.88rem] font-bold tracking-widest'>
-                  {data?.avg_rating}
+                  {data?.avg_rating.toFixed(1)}
                 </p>
               </div>
               <p 
@@ -168,9 +171,9 @@ const Content = ({ data }: { data?: Item }) => {
                 </p>
                 <br />
                 { expandedContent && (
-                  <div className='flex flex-row gap-2'>
+                  <div className='p-0 max-w-[29.375rem] flex flex-wrap mb-[-0.375rem] gap-2'>
                     {data?.tags.map((item, index) => (
-                      <p key={index} className='text-sm text-purple-2 bg-white bg-opacity-15 px-1 py-1 rounded-md'>
+                      <p key={index} className='text-[0.92rem] font-extrabold text-purple-2 bg-white bg-opacity-15 px-1 py-1 rounded-md'>
                         #{item}
                       </p>
                     ))}
