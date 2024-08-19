@@ -1,15 +1,10 @@
 import clsx from "clsx";
-
-import { useState } from "react";
 import { Link } from 'react-router-dom';
-
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearch } from "react-icons/bi";
-import { Logo } from "@/assets/Logo/Logo";
-
+import { Logo } from "@/assets/logo/Logo";
 import SideMenuBar from "../SideMenuBar";
 import SearchBar from "../SearchBar"
-
 import {
   toggleClickSearch, 
   toggleClickHamburger,
@@ -23,6 +18,7 @@ export default function NavRightList({ isScroll }: { isScroll: boolean } ) {
   const clickHamburger = useAppSelector(selectClickHamburger);
   const dispatch = useAppDispatch();
 
+
   const handleClickSearch = () => {
     dispatch(toggleClickSearch());
   }
@@ -35,7 +31,7 @@ export default function NavRightList({ isScroll }: { isScroll: boolean } ) {
   const combinedHamburger = clsx(baseHamburger, { [scrolledHamburger]: isScroll, [nonScrolledHamburger]: !isScroll });
   const combinedSearch = clsx(baseSearch, { [scrolledSearch]: isScroll, [nonScrolledSearch]: !isScroll });
   const combinedLogo = clsx({ [scrolledLogo]: isScroll, [baseLogo]: !isScroll });
-  
+
   return (
     <>
       <div className='flex flex-row max-lg:w-full max-lg:justify-end '>
@@ -50,7 +46,7 @@ export default function NavRightList({ isScroll }: { isScroll: boolean } ) {
         </div>
       </div>
       <div className={combinedLogo}>
-        <Logo color="black" width={80} height={25} />
+        <Logo color='black' width={80} height={25} />
       </div>
       { clickHamburger && ( 
         <div 

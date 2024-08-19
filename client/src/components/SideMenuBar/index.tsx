@@ -8,8 +8,8 @@ import {
 } from "@/features/nav/clickSlice";
 import { useAppDispatch } from "@/app/hooks";
 
-import { Character } from '@/assets/Logo/Character';
-import { Logo } from '@/assets/Logo/Logo';
+import { Character } from '@/assets/logo/Character';
+import { Logo } from '@/assets/logo/Logo';
 
 import { FaRegCheckSquare } from 'react-icons/fa';
 import { IoMdCard } from 'react-icons/io';

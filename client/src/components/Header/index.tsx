@@ -11,7 +11,7 @@ const Header = () => {
   const isScroll = useScroll();
 
   const isHome = location.pathname === '/';
-  const isMembership = location.pathname === '/membership';
+  const isMembership = location.pathname === '/membership/landing';
   const isExcludedPath = /(profile|auth).*/.test(location.pathname);
 
   if (isExcludedPath) {
@@ -48,7 +48,7 @@ const Header = () => {
 
 const baseClasses = 'fixed w-full z-10 pt-5 pl-12 pr-12 pb-5 max-lg:pl-4 max-lg:pr-4 flex justify-between';
 const additionalClasses = 'bg-white h-16 border-b-[2px] border-border-1';
-const membershipAdditionalClasses = 'bg-black h-16 border-b-[2px] border-border-1';
+const membershipAdditionalClasses = 'bg-black h-16 border-b-[1px] border-smoked-black';
 
 export default Header;
 
