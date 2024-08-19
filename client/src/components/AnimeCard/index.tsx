@@ -1,15 +1,26 @@
 import { Daily } from "@/types/daily";
 import { RankingItem } from "@/types/ranking";
+import { ThemeItem, Anime as ThemeAnime } from "@/types/recommends-themes";
 import { Item } from "@/types/item";
 import { useAppDispatch } from '@/app/hooks';
 import { toggle, animeId } from '@/features/modal/animeModalSlice';
 
-type Props =  Daily | RankingItem | Item;
+type Props =  Daily | RankingItem | Item | ThemeItem;
+type Anime = Daily | RankingItem | Item | ThemeAnime;
 
 const AnimeCard = ({ data }: { data: Props }) => {
-  const { id, name, img } = data;
-
   const dispatch = useAppDispatch();
+
+  let anime: Anime | undefined = undefined;
+
+  if ('item' in data ) {
+    anime = data.item;
+  } else {
+    anime = data;
+  }
+  
+  const { id, name } = anime;
+  const img = anime.images[0].img_url;
 
   const handleClick = () => {
     dispatch(toggle());
@@ -19,7 +30,7 @@ const AnimeCard = ({ data }: { data: Props }) => {
   return (
     <div
       onClick={handleClick} 
-      className="grow-0 shrink-0 mx-auto 2xl:h-56 xl:h-52 lg:h-48 md:h-40 sm:h-36 max-sm:h-32"
+      className="grow-0 shrink-0 mx-auto 2xl:h-56 xl:h-52 lg:h-48 md:h-40 sm:h-36 max-sm:h-24"
     >
         <img 
             className="object-cover rounded-md w-full h-4/5"

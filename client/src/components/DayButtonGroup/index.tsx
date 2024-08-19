@@ -5,9 +5,10 @@ import { useScreenWidth } from "@/hooks/useScreenWidth";
 import DailyAnimeCard from "@/pages/Daily/components/DailyAnimeCard";
 import { Daily } from "@/types/daily";
 import { getDaily } from "@/apis/getAPIs";
-import AnimeSlider from "@/pages/Home/components/AnimeSlider/AnimeSlider";
+import DailyAnimeSlider from "@/pages/Home/components/AnimeSlider/DailyAnimeSlider";
 import { useQueries, UseQueryResult } from "@tanstack/react-query";
 import Skeleton from '@mui/material/Skeleton';
+import AnimeCardSkeleton from "../Skeleton/AnimeCardSkeleton";
 import Box from '@mui/material/Box';
 
 type DayOfWeek = '월요일' | '화요일' | '수요일' | '목요일' | '금요일' | '토요일' | '일요일' ;
@@ -27,7 +28,6 @@ const DayButtonGroup = ({ isHomePage }: { isHomePage: boolean }) => {
 
     const dailyQueries: UseQueryResult<Daily[], Error>[] = useQueries({
         queries: days.map((_, index) => {
-            const dayIndex = (index + 1) % 7 as Today;
             return {
                 queryKey: ['daily', index as Today],
                 queryFn: () => getDaily(index as Today),
@@ -60,15 +60,9 @@ const DayButtonGroup = ({ isHomePage }: { isHomePage: boolean }) => {
                         ))}
                     </div>
                     { getDataForDay(day).length > 0 ? ( 
-                            <AnimeSlider data={getDataForDay(day)} /> 
+                            <DailyAnimeSlider data={getDataForDay(day)} /> 
                         ) : (
-                            <div>
-                                <Skeleton variant="rectangular" width="100%" height={140} />
-                                <Box sx={{ pt: 0.5 }}>
-                                    <Skeleton width="100%" />
-                                    <Skeleton width="70%" />
-                                </Box>
-                            </div>
+                            <><AnimeCardSkeleton /><br /></>
                         )
                     }
                 </>
@@ -98,13 +92,7 @@ const DayButtonGroup = ({ isHomePage }: { isHomePage: boolean }) => {
                                         ))}
                                     </>
                                 ) : (
-                                    <>
-                                        {Array.from({ length: 6 }).map((_, index) => (
-                                            <Box key={index} sx={{ pt: 1, pb: 0.5 }}>
-                                                <Skeleton variant="rectangular" width={220} height={120} />
-                                            </Box>
-                                        ))}
-                                    </>
+                                    <><AnimeCardSkeleton /><br /></>
                                 )
                                 }
                             </div>
@@ -147,9 +135,7 @@ const DayButtonGroup = ({ isHomePage }: { isHomePage: boolean }) => {
     );
 }
 
-
-
-const home = 'xl:size-16 xl:text-2xl lg:size-12 lg:text-lg md:size-10 md:text-md sm:size-10 sm:text-md xs:size-9 xs:text-sm rounded-full font-semibold text-white';
+const home = 'xl:size-16 xl:text-2xl lg:size-12 lg:text-lg md:size-10 md:text-md sm:size-10 sm:text-md max-sm:size-8 max-sm:text-sm rounded-full font-semibold text-white';
 const homeSelected = 'bg-purple';
 const homeUnselected = 'bg-grey-button';
 
