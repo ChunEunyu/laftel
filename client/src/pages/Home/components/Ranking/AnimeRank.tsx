@@ -7,6 +7,7 @@ import { getRanking } from "@/apis/getAPIs";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import AnimeCardSkeleton from "@/components/Skeleton/AnimeCardSkeleton";
 
 type RankingKey = '실시간'|'이번주'|'분기'|'역대';
 
@@ -54,7 +55,7 @@ const AnimeRank = () => {
           })}
         </div>
         { isLoading ? (
-            <SkeletonUI /> 
+            <><AnimeCardSkeleton /><br /></>
           ) : (
             <RankingSlider data={rankingData ?? []} />
           )

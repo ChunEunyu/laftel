@@ -1,11 +1,12 @@
 import { RankingItem } from "@/types/ranking";
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useAppDispatch } from '@/app/hooks';
 import { toggle, animeId } from '@/features/modal/animeModalSlice';
 
 type Props =  RankingItem;
 
 const RankingAnimeCard = ({ data, number }: { data: Props, number: number }) => {
-  const { id, name, img, genres } = data;
+  const { id, name, genres } = data;
+  const img = data.images[0].img_url;
 
   const dispatch = useAppDispatch();
 
