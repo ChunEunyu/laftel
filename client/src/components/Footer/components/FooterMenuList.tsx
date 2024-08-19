@@ -1,4 +1,4 @@
-import { Logo } from '@/assets/Logo/Logo';
+import { Logo } from '@/assets/logo/Logo';
 
 type menuType = {
     name: string;
