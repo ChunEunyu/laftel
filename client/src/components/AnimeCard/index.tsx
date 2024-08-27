@@ -1,12 +1,13 @@
 import { Daily } from "@/types/daily";
 import { RankingItem } from "@/types/ranking";
+import { RelatedResult } from "@/types/related";
 import { ThemeItem, Anime as ThemeAnime } from "@/types/recommends-themes";
 import { Item } from "@/types/item";
 import { useAppDispatch } from '@/app/hooks';
 import { toggle, animeId } from '@/features/modal/animeModalSlice';
 
-type Props =  Daily | RankingItem | Item | ThemeItem;
-type Anime = Daily | RankingItem | Item | ThemeAnime;
+type Props =  Daily | RankingItem | Item | ThemeItem | RelatedResult;
+type Anime = Daily | RankingItem | Item | ThemeAnime | RelatedResult;
 
 const AnimeCard = ({ data }: { data: Props }) => {
   const dispatch = useAppDispatch();
