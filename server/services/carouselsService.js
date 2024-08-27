@@ -4,6 +4,7 @@ import db from "../db/connection.js";
 export const getRandomCarousels = async () => {
     const collection = await db.collection("carousels");
     const count = await collection.countDocuments();
-    const results = await collection.aggregate([{ $sample: { size: count } }]).toArray();
+    const sampleSize = Math.min(count, 9);
+    const results = await collection.aggregate([{ $sample: { size: sampleSize } }]).toArray();
     return results;
 };
