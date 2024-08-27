@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import { logout } from '@/apis/postApis';
 import { useScreenWidth } from '@/hooks/useScreenWidth';
-
 import {
   toggleClickHamburger,
 } from "@/features/nav/clickSlice";
@@ -13,13 +12,17 @@ import { Logo } from '@/assets/logo/Logo';
 
 import { FaRegCheckSquare } from 'react-icons/fa';
 import { IoMdCard } from 'react-icons/io';
-import { IoCloseOutline } from 'react-icons/io5';
+import { IoCloseOutline, IoExitOutline } from 'react-icons/io5';
 import { MdOutlineCalendarToday } from 'react-icons/md';
 import { VscSparkle } from 'react-icons/vsc';
+import { GrNext } from 'react-icons/gr';
 
 export default function SideMenuBar() {
   const isMobile = useScreenWidth();
   const dispatch = useAppDispatch();
+
+  const isLoggedIn = sessionStorage.getItem('auth');
+  const user = isLoggedIn ? JSON.parse(isLoggedIn) : null;
 
   const handleClickHamburger = () => {
     dispatch(toggleClickHamburger());
@@ -43,11 +46,26 @@ export default function SideMenuBar() {
         </div>
         <div className='pl-2'><Character width={110} height={100} /></div>
       </div>
-      <Link to='/auth' className='bg-purple ml-2 mr-2 pt-3 pb-3 mb-4 text-white text-bold rounded-md'>
-        <button className='pl-24'>
-          로그인 가입
-        </button>
-      </Link>
+      { isLoggedIn ? 
+        <Link to='/inventory' className='px-4 pb-4 flex flex-row gap-2'>
+          <img
+            className='w-6 h-6 rounded-full' 
+            src={user.img} 
+          />
+          <div className='flex flex-row'>
+            <p className='font-bold text-sm'>
+              {user.name}
+            </p>
+            <GrNext className='pt-1' />
+          </div>
+        </Link>
+        :
+        <Link to='/auth' className='bg-purple ml-2 mr-2 pt-3 pb-3 mb-4 text-white text-bold rounded-md'>
+          <button className='pl-24'>
+            로그인 가입
+          </button>
+        </Link>
+      }
       <div className='h-2 bg-border-1 w-inherit' />
       <Link to="/finder" className='flex ml-3 mt-4 mb-4 hover:text-purple' >
         <FaRegCheckSquare className='mt-[0.1rem] mr-2' />
@@ -67,6 +85,16 @@ export default function SideMenuBar() {
         <p className='font-bold text-sm'>라프텔 멤버십</p>
       </Link>
       <div className='h-2 bg-border-1 w-inherit' />
+      { isLoggedIn && (
+        <Link
+          to='/'
+          onClick={() => { logout(); }} 
+          className='gap-1 flex ml-3 mt-4 mb-4 cursor-pointer hover:text-purple'
+        >
+          <IoExitOutline className='w-5 h-5' />
+          <p className='font-bold text-sm'>로그아웃</p>
+        </Link>
+      )}
     </div>
   );
 }

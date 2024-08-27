@@ -14,11 +14,14 @@ import {
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
 export default function NavRightList({ isScroll }: { isScroll: boolean } ) {
-  const clickSearch = useAppSelector(selectClickSearch);
-  const clickHamburger = useAppSelector(selectClickHamburger);
   const dispatch = useAppDispatch();
 
-
+  const clickSearch = useAppSelector(selectClickSearch);
+  const clickHamburger = useAppSelector(selectClickHamburger);
+  
+  const isLoggedIn = sessionStorage.getItem('auth');
+  const user = isLoggedIn ? JSON.parse(isLoggedIn) : null;
+  
   const handleClickSearch = () => {
     dispatch(toggleClickSearch());
   }
@@ -38,9 +41,20 @@ export default function NavRightList({ isScroll }: { isScroll: boolean } ) {
         <div className="flex flex-row">
           { clickSearch ? <SearchBar /> : <BiSearch onClick={handleClickSearch} className={combinedSearch} /> }
         </div>
-        <Link to="/auth" className={combinedToAuth}>
-          로그인/가입
-        </Link>
+        {isLoggedIn ? 
+          <Link to='/inventory' className={combinedToAuth}>
+            <img
+              className="w-6 h-6 rounded-full" 
+              src={user.img} 
+              alt='' 
+            />
+            <p className="cursor-pointer">{user.name}</p>
+          </Link>
+          : 
+          <Link to="/auth" className={combinedToAuth}>
+            로그인/가입
+          </Link>
+        }
         <div>
           <RxHamburgerMenu onClick={handleClickHamburger} className={combinedHamburger} />
         </div>
@@ -64,7 +78,7 @@ const baseSearch = 'max-lg:w-6 max-lg:h-6 max-lg:mt-[1px] max-lg:mr-3 lg:w-8 lg:
 const scrolledSearch = 'text-black xl:hover:text-purple';
 const nonScrolledSearch = 'text-white rounded-full lg:hover:bg-white lg:hover:bg-opacity-25';
 
-const baseToAuth = 'max-lg:hidden pb-0 pt-0 mt-1 text-md no-underline font-bold tracking-tighter';
+const baseToAuth = 'max-lg:hidden pb-0 pt-0 mt-1 flex flex-row gap-2 text-md no-underline font-bold tracking-tighter';
 const scrolledToAuth = 'text-black hover:text-purple';
 const nonScrolledToAuth = 'text-white text-opacity-80 hover:text-opacity-100';
 

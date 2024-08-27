@@ -13,6 +13,7 @@ import AuthMain from "./Auth/components/AuthMain";
 import Search from "./Search";
 import Register from "./Auth/components/RegisterForm";
 import Login from "./Auth/components/LoginForm";
+import Inventory from "./inventory";
 
 export {
     Auth,
@@ -23,6 +24,7 @@ export {
     Membership,
     Profile,
     Search,
+    Inventory,
     Themes,
     ThemeDetail,
     ThemesAll,
