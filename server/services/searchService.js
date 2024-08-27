@@ -6,7 +6,8 @@ export const searchItems = async (keyword, viewingAll) => {
         let filter = {
             $or: [
                 { name: { $regex: keyword, $options: 'i' } },
-                { genres: { $in: [keyword] } }
+                { genres: { $in: [keyword] } },
+                { production: { $regex: keyword, $options: 'i' } },
             ]
         };
 
