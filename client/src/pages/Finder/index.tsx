@@ -7,7 +7,7 @@ import { getDiscover } from '@/apis/getAPIs';
 import Filter from './components/Filter';
 import AnimeCard from '@/components/AnimeCard';
 import { Item } from '@/types/item';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Finder = () => {
   const isMobile = useScreenWidth();
@@ -42,7 +42,9 @@ const Finder = () => {
           </p>
           <div className='lg:hidden w-full h-[1px] bg-border-1 mt-3 mb-3' />
           {loading ? (
-            <>loading...</>
+            <div className='absolute top-1/2 left-[55%]'>
+              <CircularProgress size={80} />
+            </div>
           ) : (
             <div className='lg:pt-4 max-lg:pt-1 px-2'>
               <ul className='p-0 m-0 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 max-sm:grid-cols-2 gap-2 lg:h-[calc(100vh-13rem)] max-lg:h-[calc(100vh-18rem)] overflow-y-auto'>
