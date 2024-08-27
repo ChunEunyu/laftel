@@ -49,4 +49,11 @@ export interface Item {
     is_wish: boolean;
     is_hate: boolean;
     brand: string;
+    review: {
+        reviewId: number;
+        email: string;
+        id: number;
+        date: Date;
+        content: string;
+    }[]
 }
