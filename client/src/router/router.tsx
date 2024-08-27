@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, LoaderFunctionArgs } from "react-router-dom";
 
 import { 
     Auth,
@@ -9,6 +9,7 @@ import {
     Membership,
     Profile,
     Search,
+    Inventory,
     Register,
     Themes,
     ThemeDetail,
@@ -18,21 +19,21 @@ import {
     Subscribed,
   } from "@/pages";
 
-import { getCarousels } from "@/apis/getAPIs";
-
+import { 
+  getRecommendsAllThemes, 
+  getRecommendsThemesById,
+  getDiscover, 
+} from "@/apis/getAPIs";
 import App from "@/App"; 
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { index: true, 
+      { path: '/',
         element: <Home />,
-        loader: async () => {
-          const carousels = await getCarousels();
-          return { carousels };
-        }
       },
       { path: 'auth',
         element: <Auth />,
@@ -42,28 +43,62 @@ export const router = createBrowserRouter([
           { path: 'Login', element: <Login /> },
         ]
       },
-      { path: 'daily', element: <Daily /> },
-      { path: 'finder', element: <Finder /> },
+      { path: 'daily', 
+        element: <Daily /> 
+      },
+      { 
+        path: 'finder', 
+        element: <Finder />, 
+      },
       {
         path: 'membership',
         element: <Membership />,
         children: [
-          { path: 'landing', element: <Landing /> },
-          { path: 'subscribed', element: <Subscribed /> },
+          { 
+            path: 'landing', 
+            element: <Landing /> 
+          },
+          { 
+            path: 'subscribed', 
+            element: <Subscribed />, 
+          },
         ],
+      },
+      {
+        path: 'inventory',
+        element: <ProtectedRoute><Inventory /></ProtectedRoute>,
       },
       {
         path: 'themes',
         element: <Themes />,
         children: [
-          { path: '', element: <ThemesAll />,
-            
-            }, 
-          { path: ':id', element: <ThemeDetail /> }, 
+          { path: '', 
+            element: <ThemesAll />,
+            loader: async () => {
+              const themesAll = await getRecommendsAllThemes();
+              return { themesAll };
+            }
+          }, 
+          { path: ':id', 
+            element: <ThemeDetail />,
+            loader: async ({ params }: LoaderFunctionArgs) => {
+              const id = Number(params.id);
+              if (id) {
+                const themesById = await getRecommendsThemesById(id);
+                return { themesById };
+              }
+            }
+          }, 
         ],
       },
-      { path: 'profile', element: <Profile /> },
-      { path: 'search', element: <Search /> },
+      { 
+        path: 'profile', 
+        element: <ProtectedRoute><Profile /></ProtectedRoute>, 
+      },
+      { 
+        path: 'search', 
+        element: <Search /> 
+      },
     ],
   },
 ]);
