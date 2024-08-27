@@ -1,10 +1,12 @@
 import express from "express";
 import db from "../db/connection.js";
+import axios from "axios";
 
 import { ObjectId } from "mongodb";
 
 // The router will be added as a middleware and will take control of requests starting with path /record.
 const router = express.Router();
+//const axios = require('axios');
 
 // This section will help you get a list of all the records.
 router.get("/", async (req, res) => {
@@ -12,6 +14,35 @@ router.get("/", async (req, res) => {
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
 });
+
+/*
+router.get("/dd", async (req, res) => {
+  try {
+    const itemsCollection = db.collection('items');
+    const items = await itemsCollection.find({}, { projection: { _id: 0, id: 1 } }).toArray();
+
+    const relatedCollection = db.collection('related');
+
+    // Loop through items and use axios for API calls
+    for (const item of items) {
+      const apiUrl = `https://api.laftel.net/api/items/v2/${item.id}/related/?limit=6&offset=0`;
+      const response = await axios.get(apiUrl);
+      const relatedData = response.data;
+
+      // Use Mongoose to insert data into related collection
+      await relatedCollection.insertOne({
+        id: item.id,
+        relatedData
+      });
+    }
+
+    res.status(200).send('Data transferred successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred');
+  }
+});
+*/
 
 // This section will help you get a single record by id
 router.get("/:id", async (req, res) => {
