@@ -10,6 +10,17 @@ export const getAllThemes = async () => {
     }
 };
 
+// n개의 테마 가져오기
+export const getThemesBySize = async (size) => {
+    try {
+        const collection = await db.collection("recommends-themes");
+        return await collection.aggregate([{ $sample: { size: parseInt(size, 10) } }]).toArray();
+    } catch (error) {
+        throw new Error("Error fetching themes: " + error.message);
+    }
+};
+
+
 // id로 특정 테마 가져오기
 export const getThemeById = async (id) => {
     try {
