@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MembershipBg from "@/assets/background/MembershipBg.png";
 import { FaCheck } from "react-icons/fa6";
+import { joinMembership, cancelMembership } from '@/apis/postApis';
 
 const memberBenefits: string[] = [
   '프로필 1인','프로필 1인 · 동시재생 1회선',
@@ -8,15 +9,18 @@ const memberBenefits: string[] = [
 ]
 
 export default function Subscribed() {
-  const [clicked, setClicked] = useState<boolean>(false);
-  const handleButtonClick = () => {
-    if (clicked) {
-      alert('멤버십이 취소되었습니다.');
-    } else {
-      alert('멤버십에 가입하였습니다.');
-    }
+  const item = sessionStorage.getItem('auth');
+  const data = item? JSON.parse(item) : null;
+  const membership = data.membership;
+  const [isMember, setIsMember] = useState<boolean>(membership);
 
-    setClicked(!clicked);
+  const handleButtonClick = async () => {
+    if (isMember) {
+      await cancelMembership();
+    } else {
+      await joinMembership();
+    }
+    setIsMember(!isMember);
   }
 
   return (
@@ -49,11 +53,14 @@ export default function Subscribed() {
               className='w-full rounded-md py-4 bg-light-purple text-lg font-bold text-purple'
               onClick={handleButtonClick}
             >
-              멤버십 가입하기
+            {isMember === false ? 
+              <span>멤버십 가입하기</span> 
+              : 
+              <span>멤버십 취소하기</span> 
+            }
             </button>
           </div>
         </div>
-        
     </div>
   );
 }

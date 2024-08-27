@@ -7,7 +7,6 @@ import center1 from "@/assets/membership/center1.png"
 import center2 from "@/assets/membership/center2.png";
 import center3 from "@/assets/membership/center3.png";
 
-
 export default function Landing() {
   const isMobile = useScreenWidth();
   const navigate = useNavigate();
