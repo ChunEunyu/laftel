@@ -7,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { api } from '@/apis';
 import { useAppDispatch } from '@/app/hooks';
-import { setIsLoggedIn, setInfo } from '@/features/auth/userSlice';
-import { useCookies } from 'react-cookie';
 
 type FormValues = {
     email: string;
@@ -34,8 +32,6 @@ export default function LoginForm() {
         
         try {
             const res = await api.post("/user/login", formData);
-            dispatch(setIsLoggedIn(true));
-            dispatch(setInfo(res.data.info));
             sessionStorage.setItem('auth', JSON.stringify(res.data.info));
             alert('로그인에 성공했습니다!');
             navigate('/profile');
