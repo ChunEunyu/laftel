@@ -143,8 +143,6 @@ const FilteringBar = ({ handleClickClose }: FilteringBarProps ) => {
   }, [checkbox]);
 
   useEffect(() => {
-    queryString;
-    console.log(queryString)
     dispatch(query(queryString));
   }, [queryString]);
 
