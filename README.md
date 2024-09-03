@@ -5,7 +5,7 @@
 - [기술 스택](#기술-스택)
 - [주요 기능](#주요-기능)
 - [주요 기술 과제](#주요-기술-과제)
-    - [React Router v6의 Loader vs React Query](#react-router-v6의-loader-vs-react-query)
+    - [React Router v6의 Loader vs TanStack Query React Query](#react-router-v6의-loader-vs-tanstack-query-react-query)
         - [Loader와 React Query 특징](#loader와-react-query-특징)
         - [Loader 사용에 적합한 사례](#loader-사용에-적합한-사례)
         - [React Query 사용에 적합한 사례](#react-query-사용에-적합한-사례)
@@ -54,7 +54,7 @@
 
 # 주요 기술 과제
 
-## React Router v6의 `Loader` vs TanStack Query `React Query`
+## React Router v6의 Loader vs TanStack Query React Query
 
 ### Loader와 React Query 특징
 
